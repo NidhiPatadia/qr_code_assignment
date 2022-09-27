@@ -1,0 +1,52 @@
+langcode: de
+status: true
+dependencies:
+  config:
+    - field.field.node.unicorn_products.body
+    - field.field.node.unicorn_products.field_product_link
+    - field.field.node.unicorn_products.field_unicorn_image
+    - image.style.large
+    - node.type.unicorn_products
+  module:
+    - text
+    - user
+_core:
+  default_config_hash: n82m7NTRaP1dMyJSkLD8kDHS47xrirV8t4JefhzwW2s
+id: node.unicorn_products.default
+targetEntityType: node
+bundle: unicorn_products
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_unicorn_image:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: large
+      svg_attributes:
+        width: null
+        height: null
+      svg_render_as_image: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  field_product_link: true
+  langcode: true
+  private_message_link: true
+  search_api_excerpt: true

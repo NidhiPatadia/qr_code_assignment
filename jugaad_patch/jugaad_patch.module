@@ -1,0 +1,17 @@
+<?php
+
+/*function jugaad_patch_preprocess_page(&$variables) {
+	//Module Path
+  $module_get_handler = \Drupal::service('module_handler');
+  $module_get_path = $module_get_handler->getModule('jugaad_patch')->getPath();
+
+  //Host path
+  global $base_url;
+	$image_path = $module_get_path .'/images/' . 'unicorn_1.jpeg';
+  	var_dump($image_path);
+  	$data = file_get_contents($image_path);
+  	var_dump($module_get_path);
+  	var_dump($base_url);
+  	var_dump($data);
+  	die();
+}*/

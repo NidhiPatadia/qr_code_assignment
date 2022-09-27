@@ -1,0 +1,5 @@
+name: Jugaad Patch Module
+type: module
+description: 'This is the assignment module'
+package: Custom
+core_version_requirement: ^9

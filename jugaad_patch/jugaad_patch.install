@@ -1,0 +1,70 @@
+<?php
+
+use \Drupal\node\Entity\Node;
+use \Drupal\file\Entity\File;
+use \Drupal\Core\File\FileSystemInterface;
+
+/**
+ * Implements hook_install().
+ */
+function jugaad_patch_install() {
+
+  $product_items = [
+    [
+      'name' => 'Unicorn 1', 
+      'description' => 'Size is approx. 3-3/8" x 4" (8.5cm x 10.16cm). High quality, detailed embroidery applique. Can be sewn or ironed on. Great for hats, bags, clothing and more!. Or you could also just stick it to your forehead!',
+      'link' => 'https://www.blindtextgenerator.com/lorem-ipsum',
+      'image' => 'unicorn_1.jpeg',
+      'alias' => '/unicorn_1',
+    ],
+    [
+      'name' => 'Unicorn 2', 
+      'description' => 'Size is approx. 3-3/8" x 4" (8.5cm x 10.16cm). High quality, detailed embroidery applique. Can be sewn or ironed on. Great for hats, bags, clothing and more!. Or you could also just stick it to your forehead!',
+      'link' => 'https://en.wikipedia.org/wiki/Unicorn',
+      'image' => 'unicorn_2.png',
+      'alias' => '/unicorn_2',
+    ],
+    [
+      'name' => 'Unicorn 3', 
+      'description' => 'Size is approx. 3-3/8" x 4" (8.5cm x 10.16cm). High quality, detailed embroidery applique. Can be sewn or ironed on. Great for hats, bags, clothing and more!. Or you could also just stick it to your forehead!',
+      'link' => 'https://www-dailymaverick-co-za.webpkgcache.com/doc/-/s/www.dailymaverick.co.za/article/2022-06-08-a-brief-history-of-unicorns/',
+      'image' => 'unicorn_3.jpg',
+      'alias' => '/unicorn_3',
+    ],
+  ];
+    
+  //Module Path
+  $module_get_handler = \Drupal::service('module_handler');
+  $module_get_path = $module_get_handler->getModule('jugaad_patch')->getPath();
+
+  //Host path
+  global $base_url;
+
+  foreach ($product_items as $key => $value) {
+  	$image_path = $module_get_path .'/images/' . $value['image'];
+  	$data = file_get_contents($image_path);
+    $file = file_save_data($data, "public://".$value['image'], FileSystemInterface::EXISTS_REPLACE);
+ 
+    // Create node object and save it.
+	$node = Node::create([
+	  'type'=> 'unicorn_products',
+	  'title'=> $value['name'],
+	  'body'=> $value['description'],
+	  'field_product_link'=> $value['link'],
+	  'field_unicorn_image'=> [
+	    'target_id' => $file->id(),
+	    'alt' => 'product',
+	  ],
+	]);
+	$node->set('path', $value['alias']);
+	$node->save();
+  }
+}
+
+
+
+
+
+
+
+
